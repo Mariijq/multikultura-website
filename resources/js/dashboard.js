@@ -83,12 +83,12 @@ switchMode.addEventListener('change', function () {
 
 });
 
-// ABOUT PAGE LANGUAGE TABS
 const languageTabs = document.querySelectorAll('.language-tab');
 const languageContents = document.querySelectorAll('.language-content');
 
 languageTabs.forEach(tab => {
     tab.addEventListener('click', function () {
+
         const language = this.dataset.language;
 
         languageTabs.forEach(tab => {
@@ -101,10 +101,56 @@ languageTabs.forEach(tab => {
 
         this.classList.add('active');
 
-        const selectedContent = document.getElementById(`language-${language}`);
+        const selectedContent = document.getElementById(
+            `language-${language}`
+        );
 
         if (selectedContent) {
             selectedContent.classList.add('active');
         }
     });
+});
+
+// =========================
+// DELETE  CONFIRMATION
+// =========================
+
+document.addEventListener('submit', function (event) {
+
+    if (!event.target.classList.contains('delete-form')) {
+        return;
+    }
+
+    event.preventDefault();
+
+    const form = event.target;
+    const title = form.dataset.title || 'this';
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You are about to delete: "${title}"`,
+        icon: 'warning',
+
+        showCancelButton: true,
+
+        confirmButtonText: 'Yes, delete it',
+        cancelButtonText: 'Cancel',
+
+        reverseButtons: true,
+
+        customClass: {
+            confirmButton: 'btn btn-danger',
+            cancelButton: 'btn btn-secondary'
+        },
+
+        buttonsStyling: false
+
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            form.submit();
+        }
+
+    });
+
 });

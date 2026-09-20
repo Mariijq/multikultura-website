@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\AboutController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\NewsController;
+use App\Http\Controllers\Backend\ProjectsController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -28,6 +30,12 @@ Route::middleware(['auth', 'admin'])
 
         Route::get('/about', [AboutController::class, 'index'])
             ->name('about');
+
+        Route::post('/about', [AboutController::class, 'update'])
+            ->name('about.update');
+
+        Route::resource('news', NewsController::class);
+        Route::resource('projects', ProjectsController::class);
 
     });
 

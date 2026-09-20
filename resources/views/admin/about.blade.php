@@ -3,13 +3,9 @@
 @section('title', 'About Us | Multikultura')
 
 @push('styles')
-    @vite('resources/css/admindashboard.css')
     <x-rich-text::styles />
 @endpush
 
-@push('scripts')
-    @vite('resources/js/dashboard.js')
-@endpush
 
 @section('content')
 
@@ -35,34 +31,29 @@
     </div>
 </div>
 
-<div class="about-container">
+<div class="dashboard-container">
 
     <div class="language-tabs">
-
         <button type="button" class="language-tab active" data-language="en">
-            <span class="language-flag">🇬🇧</span>
             <span>English</span>
         </button>
 
         <button type="button" class="language-tab" data-language="mk">
-            <span class="language-flag">🇲🇰</span>
             <span>Македонски</span>
         </button>
 
         <button type="button" class="language-tab" data-language="al">
-            <span class="language-flag">🇦🇱</span>
             <span>Shqip</span>
         </button>
-
     </div>
 
-    <form method="POST" action="#">
+    <form method="POST" action="{{ route('admin.about.update') }}">
         @csrf
 
         <div class="language-content active" id="language-en">
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">English</span>
                         <h2>Who We Are</h2>
@@ -72,11 +63,12 @@
                 <x-rich-text::input
                     name="who_we_are_en"
                     id="who_we_are_en"
+                    :value="old('who_we_are_en', $about?->who_we_are['en'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">English</span>
                         <h2>What We Offer</h2>
@@ -86,11 +78,12 @@
                 <x-rich-text::input
                     name="what_we_offer_en"
                     id="what_we_offer_en"
+                    :value="old('what_we_offer_en', $about?->what_we_offer['en'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">English</span>
                         <h2>Vision</h2>
@@ -100,11 +93,12 @@
                 <x-rich-text::input
                     name="vision_en"
                     id="vision_en"
+                    :value="old('vision_en', $about?->vision['en'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">English</span>
                         <h2>Mission</h2>
@@ -114,6 +108,7 @@
                 <x-rich-text::input
                     name="mission_en"
                     id="mission_en"
+                    :value="old('mission_en', $about?->mission['en'] ?? '')"
                 />
             </div>
 
@@ -121,8 +116,8 @@
 
         <div class="language-content" id="language-mk">
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Македонски</span>
                         <h2>Кои сме ние</h2>
@@ -132,11 +127,12 @@
                 <x-rich-text::input
                     name="who_we_are_mk"
                     id="who_we_are_mk"
+                    :value="old('who_we_are_mk', $about?->who_we_are['mk'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Македонски</span>
                         <h2>Што нудиме</h2>
@@ -146,11 +142,12 @@
                 <x-rich-text::input
                     name="what_we_offer_mk"
                     id="what_we_offer_mk"
+                    :value="old('what_we_offer_mk', $about?->what_we_offer['mk'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Македонски</span>
                         <h2>Визија</h2>
@@ -160,11 +157,12 @@
                 <x-rich-text::input
                     name="vision_mk"
                     id="vision_mk"
+                    :value="old('vision_mk', $about?->vision['mk'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Македонски</span>
                         <h2>Мисија</h2>
@@ -174,6 +172,7 @@
                 <x-rich-text::input
                     name="mission_mk"
                     id="mission_mk"
+                    :value="old('mission_mk', $about?->mission['mk'] ?? '')"
                 />
             </div>
 
@@ -181,8 +180,8 @@
 
         <div class="language-content" id="language-al">
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Shqip</span>
                         <h2>Kush jemi ne</h2>
@@ -192,11 +191,12 @@
                 <x-rich-text::input
                     name="who_we_are_al"
                     id="who_we_are_al"
+                    :value="old('who_we_are_al', $about?->who_we_are['al'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Shqip</span>
                         <h2>Çfarë ofrojmë</h2>
@@ -206,11 +206,12 @@
                 <x-rich-text::input
                     name="what_we_offer_al"
                     id="what_we_offer_al"
+                    :value="old('what_we_offer_al', $about?->what_we_offer['al'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Shqip</span>
                         <h2>Vizioni</h2>
@@ -220,11 +221,12 @@
                 <x-rich-text::input
                     name="vision_al"
                     id="vision_al"
+                    :value="old('vision_al', $about?->vision['al'] ?? '')"
                 />
             </div>
 
-            <div class="about-card">
-                <div class="about-card-header">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Shqip</span>
                         <h2>Misioni</h2>
@@ -234,12 +236,13 @@
                 <x-rich-text::input
                     name="mission_al"
                     id="mission_al"
+                    :value="old('mission_al', $about?->mission['al'] ?? '')"
                 />
             </div>
 
         </div>
 
-        <div class="about-actions">
+        <div class="actions">
             <button type="submit" class="save-button">
                 <i class='bx bx-save'></i>
                 Save Changes
@@ -251,4 +254,3 @@
 </div>
 
 @endsection
-

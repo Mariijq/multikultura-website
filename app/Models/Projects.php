@@ -8,7 +8,6 @@ class Projects extends Model
 {
         protected $fillable = [
         'title',
-        'subtitle',
         'short_description',
         'detailed_description',
         'image',
@@ -18,10 +17,8 @@ class Projects extends Model
 
         protected $casts = [
         'title' => 'array',
-        'subtitle' => 'array',
         'short_description' => 'array',
         'detailed_description' => 'array',
-        'status' => 'array',
         'date' => 'date',
     ];
 }
