@@ -60,7 +60,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="{{ route('admin.publications.index') }}">
                 <i class='bx bx-book bx-sm'></i>
                 <span class="text">Publications</span>
             </a>
@@ -74,7 +74,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="{{ route('admin.contact') }}">
                 <i class='bx bx-envelope bx-sm'></i>
                 <span class="text">Contact</span>
             </a>

@@ -7,15 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     protected $fillable = [
-        'name',
         'email',
-        'subject',
-        'message',
+        'address',
+        'phone',
+        'facebook',
+        'instagram',
+        'linkedin',
+        'youtube',
+        'google_maps_link',
     ];
     protected $casts = [
-        'name' => 'array',
         'email' => 'array',
-        'subject' => 'array',
-        'message' => 'array',
+        'address' => 'array',
+        'phone' => 'array',
+        'facebook' => 'array',
+        'instagram' => 'array',
+        'linkedin' => 'array',
+        'youtube' => 'array',
     ];
 }

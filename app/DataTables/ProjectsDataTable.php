@@ -86,7 +86,7 @@ class ProjectsDataTable extends DataTable
                     <form method="POST"
                         action="' . route('admin.projects.destroy', $project->id) . '"
                         class="delete-form"
-                        data-title="' . e($project->title[app()->getLocale()] ?? '') . '">
+                        data-title="' . $title . '">
 
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '

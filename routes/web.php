@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\NewsController;
 use App\Http\Controllers\Backend\ProjectsController;
+use App\Http\Controllers\Backend\PublicationsController;
+use App\Http\Controllers\Backend\ContactController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -25,18 +27,18 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
 
-        Route::view('/dashboard', 'admin.dashboard')
-            ->name('dashboard');
+        Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
 
-        Route::get('/about', [AboutController::class, 'index'])
-            ->name('about');
+        Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-        Route::post('/about', [AboutController::class, 'update'])
-            ->name('about.update');
+        Route::post('/about', [AboutController::class, 'update'])->name('about.update');
 
         Route::resource('news', NewsController::class);
         Route::resource('projects', ProjectsController::class);
+        Route::resource('publications', PublicationsController::class);
 
+        Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+        Route::post('/contact', [ContactController::class, 'update'])->name('contact.update');
     });
 
 require __DIR__.'/auth.php';
