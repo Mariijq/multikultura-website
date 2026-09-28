@@ -1,25 +1,115 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Forgot Password | Multikultura</title>
+
+@vite([
+    'resources/css/app.css',
+    'resources/css/login.css',
+    'resources/js/app.js',
+])
+
+</head>
+
+<body>
+
+<main class="login-page">
+
+<section class="login-card">
+
+    {{-- LEFT SIDE IMAGE --}}
+    <div class="login-image">
+
+        <img
+            src="{{ asset('images/images.jpg') }}"
+            alt="Multikultura"
+        >
+
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    {{-- RIGHT SIDE FORM --}}
+    <div class="login-content">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="login-form-wrapper">
+
+            <h1>Forgot Password?</h1>
+
+            <p class="login-subtitle">
+                Enter your email address and we will send you a link to reset your password.
+            </p>
+
+
+            <x-auth-session-status
+                class="login-status"
+                :status="session('status')"
+            />
+
+
+            <form method="POST"
+                  action="{{ route('password.email') }}"
+                  class="login-form">
+
+                @csrf
+
+
+                {{-- EMAIL --}}
+                <div class="form-group">
+
+                    <label for="email">
+                        Email address
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        autofocus
+                        autocomplete="email"
+                        placeholder="admin@example.com"
+                    >
+
+                    <x-input-error
+                        :messages="$errors->get('email')"
+                        class="login-error"
+                    />
+
+                </div>
+
+
+                {{-- BUTTON --}}
+                <button type="submit"
+                        class="login-button">
+
+                    Email Password Reset Link
+
+                </button>
+
+
+                {{-- BACK TO LOGIN --}}
+                <div class="forgot-password-back">
+
+                    <a href="{{ route('login') }}">
+                        ← Back to Login
+                    </a>
+
+                </div>
+
+            </form>
+
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+
+</section>
+</main>
+
+</body>
+</html>

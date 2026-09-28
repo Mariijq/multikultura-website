@@ -459,7 +459,7 @@ body {
     margin-bottom: 5px;
     color: var(--dark-red);
     font-family: var(--lato);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.6px;
@@ -813,7 +813,18 @@ body.dark .dt-length select {
     outline: none;
     transition: 0.2s ease;
 }
-
+.form-input .search-btn {
+    background: var(--dark-red);
+    color: var(--light);
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .form-input:focus {
     border-color: var(--dark-red);
     box-shadow: 0 0 0 3px rgba(164, 61, 87, 0.08);

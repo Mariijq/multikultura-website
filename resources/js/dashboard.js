@@ -73,12 +73,19 @@ window.addEventListener('resize', function () {
 
 const switchMode = document.getElementById('switch-mode');
 
+if (localStorage.getItem('darkMode') === 'true') {
+    switchMode.checked = true;
+    document.body.classList.add('dark');
+}
+
 switchMode.addEventListener('change', function () {
 
     if (this.checked) {
         document.body.classList.add('dark');
+        localStorage.setItem('darkMode', 'true');
     } else {
         document.body.classList.remove('dark');
+        localStorage.setItem('darkMode', 'false');
     }
 
 });

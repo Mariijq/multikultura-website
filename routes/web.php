@@ -7,14 +7,15 @@ use App\Http\Controllers\Backend\NewsController;
 use App\Http\Controllers\Backend\ProjectsController;
 use App\Http\Controllers\Backend\PublicationsController;
 use App\Http\Controllers\Backend\ContactController;
+use App\Http\Controllers\Backend\SettingsController;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/settings', function () {
+    return view('admin.settings');
+})->middleware(['auth', 'verified'])->name('settings');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,8 +30,14 @@ Route::middleware(['auth', 'admin'])
 
         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
 
-        Route::get('/about', [AboutController::class, 'index'])->name('about');
+        Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+        Route::post('/settings/account', [SettingsController::class, 'updateAccount'])->name('settings.account.update');
+        Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+        Route::post('/settings/reset-password', [SettingsController::class, 'sendResetLink'])->name('settings.reset-password');
+        Route::post('/settings/appearance', [SettingsController::class, 'updateAppearance'])->name('settings.appearance.update');
+        Route::post('/settings/language', [SettingsController::class, 'updateLanguage'])->name('settings.language.update');
 
+        Route::get('/about', [AboutController::class, 'index'])->name('about');
         Route::post('/about', [AboutController::class, 'update'])->name('about.update');
 
         Route::resource('news', NewsController::class);

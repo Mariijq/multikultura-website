@@ -25,19 +25,7 @@
 
 <section id="sidebar">
 
-    <a href="{{ route('admin.dashboard') }}" class="brand">
-        <img src="{{ asset('images/images.jpg') }}" alt="Multikultura">
-    </a>
-
     <ul class="side-menu top">
-
-        <li>
-            <a href="{{ route('dashboard') }}">
-                <i class='bx bxs-dashboard bx-sm'></i>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-
         <li>
             <a href="{{ route('admin.about') }}">
                 <i class='bx bx-info-circle bx-sm'></i>
@@ -85,7 +73,7 @@
     <ul class="side-menu">
 
         <li>
-            <a href="#">
+            <a href="{{ route('admin.settings') }}">
                 <i class='bx bxs-cog bx-sm'></i>
                 <span class="text">Settings</span>
             </a>

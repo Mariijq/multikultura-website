@@ -28,6 +28,8 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'preferred_language' => 'string',
+            'dark_mode' => 'boolean',
         ];
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+
 class AdminUserSeeder extends Seeder
 {
     /**
@@ -23,5 +24,16 @@ class AdminUserSeeder extends Seeder
         $admin->email_verified_at = now();
 
         $admin->save();
+
+        $admin2 = User::firstOrNew([
+            'email' => 'stojkovskamarija72@gmail.com',
+        ]);
+
+        $admin2->name = 'Marija Stojkovska';
+        $admin2->password = Hash::make('ChangeThisPassword123!');
+        $admin2->is_admin = true;
+        $admin2->email_verified_at = now();
+
+        $admin2->save();
     }
 }

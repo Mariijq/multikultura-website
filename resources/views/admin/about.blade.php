@@ -15,7 +15,7 @@
 
         <ul class="breadcrumb">
             <li>
-                <a href="{{ route('admin.dashboard') }}">
+                <a href="#">
                     Dashboard
                 </a>
             </li>
