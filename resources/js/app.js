@@ -11,6 +11,7 @@ import 'laravel-datatables-vite';
 
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 import Swal from 'sweetalert2';
 window.Swal = Swal;

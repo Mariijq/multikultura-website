@@ -47,7 +47,7 @@ class NewsController extends Controller
             'detailed_description_mk' => 'nullable|string',
             'detailed_description_al' => 'nullable|string',
             'date' => 'nullable|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'link' => 'nullable|url',
             'video' => 'nullable|mimes:mp4,webm,ogg|max:10240',
         ]);
@@ -148,7 +148,7 @@ class NewsController extends Controller
             'detailed_description_mk' => 'nullable|string',
             'detailed_description_al' => 'nullable|string',
             'date' => 'nullable|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'link' => 'nullable|url',
             'video' => 'nullable|mimes:mp4,webm,ogg|max:10240',
         ]);
