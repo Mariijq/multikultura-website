@@ -32,10 +32,58 @@
         </div>
 
         <div class="latest-news-button">
-            <a href="#">{{ __('frontend.more_news') }}</a>
+            <a href="{{ route('frontend.all-news') }}">{{ __('frontend.more_news') }}</a>
         </div>
 
     </div>
 </section>
 
+<section class="about-section">
+    <div class="about-container">
+
+        <div class="about-card">
+            <h2>{{ __('frontend.who_we_are') }}</h2>
+            <p>{!! $about->who_we_are[$locale] ?? $about->who_we_are['en'] ?? '' !!}</p>
+        </div>
+
+        <div class="about-card">
+            <h2>{{ __('frontend.what_we_offer') }}</h2>
+            <p>{!! $about->what_we_offer[$locale] ?? $about->what_we_offer['en'] ?? '' !!}</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="projects-section">
+    <div class="projects-container">
+
+        <h2>{{ __('frontend.projects') }}</h2>
+
+        <div class="projects-grid">
+
+            @foreach($projects as $project)
+                <a href="#" class="project-card">
+                    @if($project->image)
+                        <img
+                            src="{{ asset('storage/' . $project->image) }}"
+                            alt="{{ $project->title[$locale] ?? $project->title['en'] }}"
+                        >
+                    @endif
+
+                    <div class="project-overlay">
+                        <h3>
+                            {{ $project->title[$locale] ?? $project->title['en'] }}
+                        </h3>
+                    </div>
+                </a>
+            @endforeach
+
+        </div>
+
+        <div class="projects-button">
+            <a href="{{ route('frontend.all-projects') }}">{{ __('frontend.more_projects') }}</a>
+        </div>
+
+    </div>
+</section>
 @endsection

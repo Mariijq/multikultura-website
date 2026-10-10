@@ -1,23 +1,16 @@
 @extends('layouts.admin')
 
-@section('title', 'About Us | Multikultura')
-
-@push('styles')
-    <x-rich-text::styles />
-@endpush
-
+@section('title', 'Contact Us | Multikultura')
 
 @section('content')
 
 <div class="head-title">
     <div class="left">
-        <h1>About Us</h1>
+        <h1>Contact Us</h1>
 
         <ul class="breadcrumb">
             <li>
-                <a href="#">
-                    Dashboard
-                </a>
+                <span class="text">Dashboard</span>
             </li>
 
             <li>
@@ -25,7 +18,7 @@
             </li>
 
             <li>
-                <span class="text">About Us</span>
+                <span class="text">Contact Us</span>
             </li>
         </ul>
     </div>
@@ -47,8 +40,10 @@
         </button>
     </div>
 
-    <form method="POST" action="{{ route('admin.about.update') }}">
+    <form method="POST" action="{{ route('admin.contact.update') }}">
         @csrf
+
+        {{-- Address --}}
 
         <div class="language-content active" id="language-en">
 
@@ -56,60 +51,16 @@
                 <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">English</span>
-                        <h2>Who We Are</h2>
+                        <h2>Address</h2>
                     </div>
                 </div>
 
-                <x-rich-text::input
-                    name="who_we_are_en"
-                    id="who_we_are_en"
-                    :value="old('who_we_are_en', $about?->who_we_are['en'] ?? '')"
-                />
-            </div>
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">English</span>
-                        <h2>What We Offer</h2>
-                    </div>
-                </div>
-
-                <x-rich-text::input
-                    name="what_we_offer_en"
-                    id="what_we_offer_en"
-                    :value="old('what_we_offer_en', $about?->what_we_offer['en'] ?? '')"
-                />
-            </div>
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">English</span>
-                        <h2>Vision</h2>
-                    </div>
-                </div>
-
-                <x-rich-text::input
-                    name="vision_en"
-                    id="vision_en"
-                    :value="old('vision_en', $about?->vision['en'] ?? '')"
-                />
-            </div>
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">English</span>
-                        <h2>Mission</h2>
-                    </div>
-                </div>
-
-                <x-rich-text::input
-                    name="mission_en"
-                    id="mission_en"
-                    :value="old('mission_en', $about?->mission['en'] ?? '')"
-                />
+                <input
+                    type="text"
+                    name="address_en"
+                    value="{{ old('address_en', $contact?->address['en'] ?? '') }}"
+                    class="form-control"
+                >
             </div>
 
         </div>
@@ -120,60 +71,16 @@
                 <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Македонски</span>
-                        <h2>Кои сме ние</h2>
+                        <h2>Адреса</h2>
                     </div>
                 </div>
 
-                <x-rich-text::input
-                    name="who_we_are_mk"
-                    id="who_we_are_mk"
-                    :value="old('who_we_are_mk', $about?->who_we_are['mk'] ?? '')"
-                />
-            </div>
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Македонски</span>
-                        <h2>Што нудиме</h2>
-                    </div>
-                </div>
-
-                <x-rich-text::input
-                    name="what_we_offer_mk"
-                    id="what_we_offer_mk"
-                    :value="old('what_we_offer_mk', $about?->what_we_offer['mk'] ?? '')"
-                />
-            </div>
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Македонски</span>
-                        <h2>Визија</h2>
-                    </div>
-                </div>
-
-                <x-rich-text::input
-                    name="vision_mk"
-                    id="vision_mk"
-                    :value="old('vision_mk', $about?->vision['mk'] ?? '')"
-                />
-            </div>
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Македонски</span>
-                        <h2>Мисија</h2>
-                    </div>
-                </div>
-
-                <x-rich-text::input
-                    name="mission_mk"
-                    id="mission_mk"
-                    :value="old('mission_mk', $about?->mission['mk'] ?? '')"
-                />
+                <input
+                    type="text"
+                    name="address_mk"
+                    value="{{ old('address_mk', $contact?->address['mk'] ?? '') }}"
+                    class="form-control"
+                >
             </div>
 
         </div>
@@ -184,60 +91,112 @@
                 <div class="dashboard-card-header">
                     <div>
                         <span class="section-label">Shqip</span>
-                        <h2>Kush jemi ne</h2>
+                        <h2>Adresa</h2>
                     </div>
                 </div>
 
-                <x-rich-text::input
-                    name="who_we_are_al"
-                    id="who_we_are_al"
-                    :value="old('who_we_are_al', $about?->who_we_are['al'] ?? '')"
-                />
+                <input
+                    type="text"
+                    name="address_al"
+                    value="{{ old('address_al', $contact?->address['al'] ?? '') }}"
+                    class="form-control"
+                >
             </div>
 
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Shqip</span>
-                        <h2>Çfarë ofrojmë</h2>
-                    </div>
-                </div>
+        </div>
 
-                <x-rich-text::input
-                    name="what_we_offer_al"
-                    id="what_we_offer_al"
-                    :value="old('what_we_offer_al', $about?->what_we_offer['al'] ?? '')"
-                />
+        {{-- Contact information --}}
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-card-header">
+                <div>
+                    <h2>Contact Information</h2>
+                </div>
             </div>
 
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Shqip</span>
-                        <h2>Vizioni</h2>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="email">Email</label>
 
-                <x-rich-text::input
-                    name="vision_al"
-                    id="vision_al"
-                    :value="old('vision_al', $about?->vision['al'] ?? '')"
-                />
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value="{{ old('email', $contact?->email ?? '') }}"
+                    class="form-control"
+                >
             </div>
 
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Shqip</span>
-                        <h2>Misioni</h2>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
 
-                <x-rich-text::input
-                    name="mission_al"
-                    id="mission_al"
-                    :value="old('mission_al', $about?->mission['al'] ?? '')"
-                />
+                <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    value="{{ old('phone', $contact?->phone ?? '') }}"
+                    class="form-control"
+                >
+            </div>
+
+        </div>
+
+        {{-- Social media --}}
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-card-header">
+                <div>
+                    <h2>Social Media</h2>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="facebook">Facebook</label>
+
+                <input
+                    type="url"
+                    name="facebook"
+                    id="facebook"
+                    value="{{ old('facebook', $contact?->facebook ?? '') }}"
+                    class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="instagram">Instagram</label>
+
+                <input
+                    type="url"
+                    name="instagram"
+                    id="instagram"
+                    value="{{ old('instagram', $contact?->instagram ?? '') }}"
+                    class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="linkedin">LinkedIn</label>
+
+                <input
+                    type="url"
+                    name="linkedin"
+                    id="linkedin"
+                    value="{{ old('linkedin', $contact?->linkedin ?? '') }}"
+                    class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="google_maps_link">Google Maps</label>
+
+                <input
+                    type="url"
+                    name="google_maps_link"
+                    id="google_maps_link"
+                    value="{{ old('google_maps_link', $contact?->google_maps_link ?? '') }}"
+                    class="form-control"
+                >
             </div>
 
         </div>

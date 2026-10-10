@@ -17,58 +17,99 @@ class ContactController extends Controller
 
     public function update(Request $request)
     {
+        // 1. Валидација на податоците
+        $validated = $request->validate([
+            'address_en' => ['required', 'string', 'max:255'],
+            'address_mk' => ['required', 'string', 'max:255'],
+            'address_al' => ['required', 'string', 'max:255'],
+
+            'email' => ['nullable', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+
+            'facebook' => ['nullable', 'url', 'max:255'],
+            'instagram' => ['nullable', 'url', 'max:255'],
+            'linkedin' => ['nullable', 'url', 'max:255'],
+
+            'google_maps_link' => ['nullable', 'string', 'max:5000'],
+        ]);
+
+        // 2. Обработка на Google Maps iframe или URL
+        $mapInput = trim($validated['google_maps_link'] ?? '');
+        $mapUrl = null;
+
+        if ($mapInput !== '') {
+
+            // Ако е внесен цел iframe код, извлечи го src.
+            if (
+                preg_match(
+                    '/<iframe\b[^>]*\bsrc\s*=\s*["\']([^"\']+)["\']/i',
+                    $mapInput,
+                    $matches
+                )
+            ) {
+                $mapUrl = html_entity_decode(
+                    $matches[1],
+                    ENT_QUOTES | ENT_HTML5,
+                    'UTF-8'
+                );
+            } else {
+                // Ако е внесен само URL.
+                $mapUrl = $mapInput;
+            }
+
+            // Провери дали URL-то е валиден Google Maps embed URL.
+            $parsedUrl = parse_url($mapUrl);
+
+            $validMapUrl =
+                is_array($parsedUrl) &&
+                strtolower($parsedUrl['scheme'] ?? '') === 'https' &&
+                in_array(
+                    strtolower($parsedUrl['host'] ?? ''),
+                    ['www.google.com', 'google.com'],
+                    true
+                ) &&
+                str_starts_with(
+                    $parsedUrl['path'] ?? '',
+                    '/maps/embed'
+                );
+
+            if (!$validMapUrl) {
+                return back()
+                    ->withErrors([
+                        'google_maps_link' =>
+                            'Внеси валиден Google Maps embed URL или цел iframe код.',
+                    ])
+                    ->withInput();
+            }
+        }
+
+        // 3. Пронајди го записот или креирај нов.
         $contact = Contact::first();
 
         if (!$contact) {
             $contact = new Contact();
         }
 
-        $validated = $request->validate([
-            'address_en' => 'required|string|max:255',
-            'address_mk' => 'required|string|max:255',
-            'address_al' => 'required|string|max:255',
-
-            'phone' => 'nullable|string|max:20',
-
-            'email_al' => 'required|email|max:255',
-
-            'subject_en' => 'nullable|string|max:255',
-            'subject_mk' => 'nullable|string|max:255',
-            'subject_al' => 'nullable|string|max:255',
-
-            'message_en' => 'nullable|string',
-            'message_mk' => 'nullable|string',
-            'message_al' => 'nullable|string',
-
-            'google_maps_link' => 'nullable|url',
-        ]);
-
+        // 4. Адреси на трите јазици.
         $contact->address = [
             'en' => $validated['address_en'],
             'mk' => $validated['address_mk'],
             'al' => $validated['address_al'],
         ];
 
+        // 5. Контакт информации.
+        $contact->email = $validated['email'] ?? null;
         $contact->phone = $validated['phone'] ?? null;
 
-        $contact->email = [
-            'al' => $validated['email_al'],
-        ];
+        // 6. Социјални мрежи.
+        $contact->facebook = $validated['facebook'] ?? null;
+        $contact->instagram = $validated['instagram'] ?? null;
+        $contact->linkedin = $validated['linkedin'] ?? null;
 
-        $contact->subject = [
-            'en' => $validated['subject_en'] ?? null,
-            'mk' => $validated['subject_mk'] ?? null,
-            'al' => $validated['subject_al'] ?? null,
-        ];
+        // 7. Зачувај го само URL-то од iframe.
+        $contact->google_maps_link = $mapUrl;
 
-        $contact->message = [
-            'en' => $validated['message_en'] ?? null,
-            'mk' => $validated['message_mk'] ?? null,
-            'al' => $validated['message_al'] ?? null,
-        ];
-
-        $contact->google_maps_link = $validated['google_maps_link'] ?? null;
-
+        // 8. Зачувај во базата.
         $contact->save();
 
         return redirect()

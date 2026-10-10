@@ -53,9 +53,16 @@
                 <span class="text">Publications</span>
             </a>
         </li>
+        
+        <li>
+            <a href="{{ route('admin.partners.index') }}">
+                <i class='bx bx-group bx-sm'></i>
+                <span class="text">Partners</span>
+            </a>
+        </li>
 
         <li>
-            <a href="#">
+            <a href="{{ route('admin.messages.index') }}">
                 <i class='bx bx-message-rounded-dots bx-sm'></i>
                 <span class="text">Messages</span>
             </a>

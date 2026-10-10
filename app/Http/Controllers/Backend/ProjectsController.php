@@ -50,7 +50,7 @@ class ProjectsController extends Controller
 
                 'date' => 'nullable|date',
 
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             ]);
 
             $project = new Projects();
@@ -150,7 +150,7 @@ class ProjectsController extends Controller
 
                 'date' => 'nullable|date',
 
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             ]);
 
             $project->title = [

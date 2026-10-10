@@ -9,17 +9,26 @@ use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\LanguageController;   
+use App\Http\Controllers\Frontend\MessageController as FrontendMessageController;
+use App\Http\Controllers\Backend\MessageController as BackendMessageController;
+use App\Http\Controllers\Backend\PartnerController;
 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { return view('frontend.home');})->name('home');
 
-Route::get('/', [HomeController::class, 'news'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/projects', [HomeController::class, 'projects'])->name('frontend.all-projects');
+Route::get('/publications', [HomeController::class, 'publications'])->name('frontend.all-publications');
+Route::get('/news', [HomeController::class, 'news'])->name('frontend.all-news');
+Route::get('/partners', [HomeController::class, 'partners'])->name('frontend.all-partners');
+Route::get('/contact', [HomeController::class, 'contact'])->name('frontend.contact');
+Route::get('/about', [HomeController::class, 'about'])->name('frontend.about-us');
+Route::post('/contact', [FrontendMessageController::class, 'store'])->name('messages.store');
 
 Route::get('lang/{locale}', [LanguageController::class, 'switch'])
     ->whereIn('locale', ['en', 'mk', 'al'])
     ->name('switch.lang');
-
 
 Route::middleware('auth')->group(function () {
 
@@ -74,6 +83,12 @@ Route::middleware(['auth', 'admin'])
 
         Route::post('/contact', [ContactController::class, 'update'])
             ->name('contact.update');
+
+        Route::get('/messages', [BackendMessageController::class, 'index'])->name('messages.index');
+        Route::get('/messages/{message}', [BackendMessageController::class, 'show'])->name('messages.show');
+        Route::delete('/messages/{message}', [BackendMessageController::class, 'destroy']) ->name('messages.destroy');
+
+        Route::resource('partners', PartnerController::class);    
     });
 
 require __DIR__.'/auth.php';

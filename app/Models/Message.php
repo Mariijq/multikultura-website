@@ -7,15 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
-        'subject',
+        'phone',
+        'field_of_study',
+        'year_of_study',
+        'address',
+        'city',
+        'country',
+        'zipcode',
+        'period',
         'message',
     ];
     protected $casts = [
-        'name' => 'array',
+        'first_name' => 'array',
+        'last_name' => 'array',
         'email' => 'array',
-        'subject' => 'array',
+        'phone' => 'array',
+        'field_of_study' => 'array',
+        'year_of_study' => 'array',
+        'address' => 'array',
+        'city' => 'array',
+        'country' => 'array',
+        'zipcode' => 'array',
+        'period' => 'array',
         'message' => 'array',
     ];
 }
