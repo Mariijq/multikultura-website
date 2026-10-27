@@ -90,4 +90,10 @@ return [
 'message_sent_successfully' => 'Your message has been sent successfully.',
 
 'partners' => 'Partners',
+
+'download_publication' => 'Download publication',
+
+'search' => 'Search',
+'search_results_for' => 'Search results for',
+'no_search_results' => 'No results found.',
 ];

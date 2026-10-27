@@ -26,7 +26,7 @@
                         ?? '';
                 @endphp
 
-                <a href="#" class="list-page-card">
+                <a href="{{ route('frontend.projects-detail', $project->id) }}" class="list-page-card">
 
                     @if($project->image)
                         <img

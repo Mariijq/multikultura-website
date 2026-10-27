@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
@@ -29,7 +28,8 @@
         'resources/css/app.css',
         'resources/css/frontend.css',
         'resources/js/app.js',
-        'resources/js/frontend.js'
+        'resources/js/frontend.js',
+        'resources/css/responsive.css'
     ])
 
     @stack('styles')
@@ -51,7 +51,7 @@
                 class="frontend-logo"
             >
                 <img
-                    src="{{ asset('images/images.jpg') }}"
+                    src="{{ asset('images/multi.png') }}"
                     alt="Multikultura"
                 >
             </a>
@@ -108,7 +108,7 @@
                         class="frontend-search"
                         id="frontendSearch"
                     >
-                        <form action="#" method="GET">
+                        <form action="{{ route('frontend.search') }}" method="GET">
 
                             <input
                                 type="text"
@@ -177,26 +177,33 @@
                 <div class="frontend-nav-links">
 
                     <a href="{{ route('frontend.about-us') }}">
-                        {{ __('frontend.about_us') }}
+                        <i class="bx bx-info-circle"></i>
+                        <span>{{ __('frontend.about_us') }}</span>
                     </a>
 
                     <a href="{{ route('frontend.all-projects') }}">
-                        {{ __('frontend.projects') }}
+                        <i class="bx bx-folder"></i>
+                        <span>{{ __('frontend.projects') }}</span>
                     </a>
 
                     <a href="{{ route('frontend.all-publications') }}">
-                        {{ __('frontend.publications') }}
+                        <i class="bx bx-book-open"></i>
+                        <span>{{ __('frontend.publications') }}</span>
                     </a>
 
                     <a href="{{ route('frontend.all-partners') }}">
-                        {{ __('frontend.partners') }}
+                        <i class="bx bx-group"></i>
+                        <span>{{ __('frontend.partners') }}</span>
                     </a>
+
                     <a href="{{ route('frontend.all-news') }}">
-                        {{ __('frontend.news_media') }}
+                        <i class="bx bx-news"></i>
+                        <span>{{ __('frontend.news_media') }}</span>
                     </a>
 
                     <a href="{{ route('frontend.contact') }}">
-                        {{ __('frontend.contact') }}
+                        <i class="bx bx-envelope"></i>
+                        <span>{{ __('frontend.contact') }}</span>
                     </a>
 
                 </div>

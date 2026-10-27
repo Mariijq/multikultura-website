@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
     public function publications()
     {
-        $publications = Publications::latest('date')->paginate(8);
+        $publications = Publications::latest()->paginate(8);
 
         return view('frontend.all-publications', compact('publications'));
     }
@@ -60,7 +60,20 @@ class HomeController extends Controller
         $partners = Partner::latest()->paginate(8);
 
         return view('frontend.all-partners', compact('partners'));
-
     }
 
+    public function newsShow(News $news)
+    {
+        return view('frontend.news-detail', compact('news'));
+    }
+
+    public function projectShow(Projects $project)
+    {
+        return view('frontend.projects-detail', compact('project'));
+    }
+
+    public function publicationShow(Publications $publication)
+    {
+        return view('frontend.publications-detail', compact('publication'));
+    }
 }

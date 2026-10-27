@@ -26,13 +26,13 @@
                         ?? '';
                 @endphp
 
-                <a href="#" class="list-page-card">
+                <a href="{{ route('frontend.news-detail', $item->id) }}" class="list-page-card">
 
                     @if($item->image)
                         <img
                             src="{{ asset('storage/' . $item->image) }}"
-                            alt="{{ $title }}"
-                            loading="lazy"
+                            alt="{{ $item->title[$locale] ?? $item->title['en'] }}"
+                            onerror="this.onerror=null; this.src='{{ asset('images/images.jpg') }}';"
                         >
                     @endif
 

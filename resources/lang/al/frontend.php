@@ -88,4 +88,10 @@ return [
 'message_sent_successfully' => 'Mesazhi juaj u dërgua me sukses.',
 
 'partners' => 'Partnerët',
+
+'download_publication' => 'Shkarko publikimin',
+
+'search' => 'Kërko',
+'search_results_for' => 'Rezultatet e kërkimit për',
+'no_search_results' => 'Nuk u gjetën rezultate.',
 ];

@@ -1,14 +1,17 @@
 @extends('layouts.admin')
 
-@section('title', 'Contact Us | Multikultura')
+@section('title', 'About Us | Multikultura')
 
 @section('content')
 
 <div class="head-title">
+
     <div class="left">
-        <h1>Contact Us</h1>
+
+        <h1>About Us</h1>
 
         <ul class="breadcrumb">
+
             <li>
                 <span class="text">Dashboard</span>
             </li>
@@ -18,194 +21,501 @@
             </li>
 
             <li>
-                <span class="text">Contact Us</span>
+                <span class="text">About Us</span>
             </li>
+
         </ul>
+
     </div>
+
 </div>
+
 
 <div class="dashboard-container">
 
-    <div class="language-tabs">
-        <button type="button" class="language-tab active" data-language="en">
-            <span>English</span>
-        </button>
+    <form
+        method="POST"
+        action="{{ route('admin.about.update') }}"
+        enctype="multipart/form-data"
+    >
 
-        <button type="button" class="language-tab" data-language="mk">
-            <span>Македонски</span>
-        </button>
-
-        <button type="button" class="language-tab" data-language="al">
-            <span>Shqip</span>
-        </button>
-    </div>
-
-    <form method="POST" action="{{ route('admin.contact.update') }}">
         @csrf
 
-        {{-- Address --}}
 
-        <div class="language-content active" id="language-en">
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">English</span>
-                        <h2>Address</h2>
-                    </div>
-                </div>
-
-                <input
-                    type="text"
-                    name="address_en"
-                    value="{{ old('address_en', $contact?->address['en'] ?? '') }}"
-                    class="form-control"
-                >
-            </div>
-
-        </div>
-
-        <div class="language-content" id="language-mk">
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Македонски</span>
-                        <h2>Адреса</h2>
-                    </div>
-                </div>
-
-                <input
-                    type="text"
-                    name="address_mk"
-                    value="{{ old('address_mk', $contact?->address['mk'] ?? '') }}"
-                    class="form-control"
-                >
-            </div>
-
-        </div>
-
-        <div class="language-content" id="language-al">
-
-            <div class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <span class="section-label">Shqip</span>
-                        <h2>Adresa</h2>
-                    </div>
-                </div>
-
-                <input
-                    type="text"
-                    name="address_al"
-                    value="{{ old('address_al', $contact?->address['al'] ?? '') }}"
-                    class="form-control"
-                >
-            </div>
-
-        </div>
-
-        {{-- Contact information --}}
+        {{-- =====================================================
+             HERO IMAGE
+        ====================================================== --}}
 
         <div class="dashboard-card">
 
             <div class="dashboard-card-header">
+
                 <div>
-                    <h2>Contact Information</h2>
+
+                    <span class="section-label">
+                        About Us
+                    </span>
+
+                    <h2>Hero Image</h2>
+
                 </div>
+
             </div>
 
+
+            @if($about?->hero_image)
+
+                <div
+                    style="
+                        width: 100%;
+                        max-width: 1000px;
+                        margin-bottom: 20px;
+                    "
+                >
+
+                    <img
+                        src="{{ asset('storage/' . $about->hero_image) }}"
+                        alt="About Us Hero"
+                        style="
+                            display: block;
+                            width: 100%;
+                            max-height: 450px;
+                            object-fit: cover;
+                            border-radius: 8px;
+                        "
+                    >
+
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        margin-bottom: 20px;
+                    "
+                >
+
+                    <input
+                        type="checkbox"
+                        name="remove_hero_image"
+                        id="remove_hero_image"
+                        value="1"
+                    >
+
+                    <label for="remove_hero_image">
+                        Remove current hero image
+                    </label>
+
+                </div>
+
+            @endif
+
+
             <div class="form-group">
-                <label for="email">Email</label>
+
+                <label for="hero_image">
+                    {{ $about?->hero_image ? 'Replace Hero Image' : 'Upload Hero Image' }}
+                </label>
 
                 <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    value="{{ old('email', $contact?->email ?? '') }}"
+                    type="file"
+                    name="hero_image"
+                    id="hero_image"
                     class="form-control"
+                    accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
                 >
-            </div>
 
-            <div class="form-group">
-                <label for="phone">Phone</label>
+                <small>
+                    Allowed formats: JPG, JPEG, PNG, GIF, WEBP.
+                    Maximum size: 10 MB.
+                </small>
 
-                <input
-                    type="text"
-                    name="phone"
-                    id="phone"
-                    value="{{ old('phone', $contact?->phone ?? '') }}"
-                    class="form-control"
-                >
             </div>
 
         </div>
 
-        {{-- Social media --}}
 
-        <div class="dashboard-card">
+        {{-- =====================================================
+             LANGUAGE TABS
+        ====================================================== --}}
 
-            <div class="dashboard-card-header">
-                <div>
-                    <h2>Social Media</h2>
+        <div class="language-tabs">
+
+            <button
+                type="button"
+                class="language-tab active"
+                data-language="en"
+            >
+                <span>English</span>
+            </button>
+
+            <button
+                type="button"
+                class="language-tab"
+                data-language="mk"
+            >
+                <span>Македонски</span>
+            </button>
+
+            <button
+                type="button"
+                class="language-tab"
+                data-language="al"
+            >
+                <span>Shqip</span>
+            </button>
+
+        </div>
+
+
+        {{-- =====================================================
+             ENGLISH
+        ====================================================== --}}
+
+        <div
+            class="language-content active"
+            id="language-en"
+        >
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            English
+                        </span>
+
+                        <h2>Who We Are</h2>
+
+                    </div>
+
                 </div>
+
+                <textarea
+                    name="who_we_are_en"
+                    class="form-control"
+                    rows="6"
+                >{{ old('who_we_are_en', $about?->who_we_are['en'] ?? '') }}</textarea>
+
             </div>
 
-            <div class="form-group">
-                <label for="facebook">Facebook</label>
 
-                <input
-                    type="url"
-                    name="facebook"
-                    id="facebook"
-                    value="{{ old('facebook', $contact?->facebook ?? '') }}"
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            English
+                        </span>
+
+                        <h2>What We Offer</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="what_we_offer_en"
                     class="form-control"
-                >
+                    rows="6"
+                >{{ old('what_we_offer_en', $about?->what_we_offer['en'] ?? '') }}</textarea>
+
             </div>
 
-            <div class="form-group">
-                <label for="instagram">Instagram</label>
 
-                <input
-                    type="url"
-                    name="instagram"
-                    id="instagram"
-                    value="{{ old('instagram', $contact?->instagram ?? '') }}"
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            English
+                        </span>
+
+                        <h2>Vision</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="vision_en"
                     class="form-control"
-                >
+                    rows="6"
+                >{{ old('vision_en', $about?->vision['en'] ?? '') }}</textarea>
+
             </div>
 
-            <div class="form-group">
-                <label for="linkedin">LinkedIn</label>
 
-                <input
-                    type="url"
-                    name="linkedin"
-                    id="linkedin"
-                    value="{{ old('linkedin', $contact?->linkedin ?? '') }}"
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            English
+                        </span>
+
+                        <h2>Mission</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="mission_en"
                     class="form-control"
-                >
-            </div>
+                    rows="6"
+                >{{ old('mission_en', $about?->mission['en'] ?? '') }}</textarea>
 
-            <div class="form-group">
-                <label for="google_maps_link">Google Maps</label>
-
-                <input
-                    type="url"
-                    name="google_maps_link"
-                    id="google_maps_link"
-                    value="{{ old('google_maps_link', $contact?->google_maps_link ?? '') }}"
-                    class="form-control"
-                >
             </div>
 
         </div>
+
+
+        {{-- =====================================================
+             MACEDONIAN
+        ====================================================== --}}
+
+        <div
+            class="language-content"
+            id="language-mk"
+        >
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Македонски
+                        </span>
+
+                        <h2>Кои сме ние</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="who_we_are_mk"
+                    class="form-control"
+                    rows="6"
+                >{{ old('who_we_are_mk', $about?->who_we_are['mk'] ?? '') }}</textarea>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Македонски
+                        </span>
+
+                        <h2>Што нудиме</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="what_we_offer_mk"
+                    class="form-control"
+                    rows="6"
+                >{{ old('what_we_offer_mk', $about?->what_we_offer['mk'] ?? '') }}</textarea>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Македонски
+                        </span>
+
+                        <h2>Визија</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="vision_mk"
+                    class="form-control"
+                    rows="6"
+                >{{ old('vision_mk', $about?->vision['mk'] ?? '') }}</textarea>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Македонски
+                        </span>
+
+                        <h2>Мисија</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="mission_mk"
+                    class="form-control"
+                    rows="6"
+                >{{ old('mission_mk', $about?->mission['mk'] ?? '') }}</textarea>
+
+            </div>
+
+        </div>
+
+
+        {{-- =====================================================
+             ALBANIAN
+        ====================================================== --}}
+
+        <div
+            class="language-content"
+            id="language-al"
+        >
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Shqip
+                        </span>
+
+                        <h2>Kush jemi ne</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="who_we_are_al"
+                    class="form-control"
+                    rows="6"
+                >{{ old('who_we_are_al', $about?->who_we_are['al'] ?? '') }}</textarea>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Shqip
+                        </span>
+
+                        <h2>Çfarë ofrojmë</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="what_we_offer_al"
+                    class="form-control"
+                    rows="6"
+                >{{ old('what_we_offer_al', $about?->what_we_offer['al'] ?? '') }}</textarea>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Shqip
+                        </span>
+
+                        <h2>Vizioni</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="vision_al"
+                    class="form-control"
+                    rows="6"
+                >{{ old('vision_al', $about?->vision['al'] ?? '') }}</textarea>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            Shqip
+                        </span>
+
+                        <h2>Misioni</h2>
+
+                    </div>
+
+                </div>
+
+                <textarea
+                    name="mission_al"
+                    class="form-control"
+                    rows="6"
+                >{{ old('mission_al', $about?->mission['al'] ?? '') }}</textarea>
+
+            </div>
+
+        </div>
+
+
+        {{-- =====================================================
+             SAVE
+        ====================================================== --}}
 
         <div class="actions">
-            <button type="submit" class="save-button">
+
+            <button
+                type="submit"
+                class="save-button"
+            >
                 <i class='bx bx-save'></i>
                 Save Changes
             </button>
+
         </div>
 
     </form>

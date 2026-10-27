@@ -12,6 +12,8 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Frontend\MessageController as FrontendMessageController;
 use App\Http\Controllers\Backend\MessageController as BackendMessageController;
 use App\Http\Controllers\Backend\PartnerController;
+use App\Http\Controllers\SearchController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,10 @@ Route::get('/partners', [HomeController::class, 'partners'])->name('frontend.all
 Route::get('/contact', [HomeController::class, 'contact'])->name('frontend.contact');
 Route::get('/about', [HomeController::class, 'about'])->name('frontend.about-us');
 Route::post('/contact', [FrontendMessageController::class, 'store'])->name('messages.store');
+Route::get('/news/{news}', [HomeController::class, 'newsShow'])->name('frontend.news-detail');
+Route::get('/projects/{project}', [HomeController::class, 'projectShow'])->name('frontend.projects-detail');
+Route::get('/publications/{publication}', [HomeController::class, 'publicationShow'])->name('frontend.publications-detail');
+Route::get('/search', [SearchController::class, 'index'])->name('frontend.search');
 
 Route::get('lang/{locale}', [LanguageController::class, 'switch'])
     ->whereIn('locale', ['en', 'mk', 'al'])

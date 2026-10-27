@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -22,6 +23,10 @@ class AboutController extends Controller
         if (!$about) {
             $about = new AboutUs();
         }
+
+        $request->validate([
+            'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        ]);
 
         $about->who_we_are = [
             'en' => $request->input('who_we_are_en'),
@@ -46,6 +51,38 @@ class AboutController extends Controller
             'mk' => $request->input('mission_mk'),
             'al' => $request->input('mission_al'),
         ];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hero image
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->hasFile('hero_image')) {
+
+            if ($about->hero_image) {
+                Storage::disk('public')->delete($about->hero_image);
+            }
+
+            $about->hero_image = $request
+                ->file('hero_image')
+                ->store('about-us', 'public');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Remove hero image
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->boolean('remove_hero_image')) {
+
+            if ($about->hero_image) {
+                Storage::disk('public')->delete($about->hero_image);
+            }
+
+            $about->hero_image = null;
+        }
 
         $about->save();
 

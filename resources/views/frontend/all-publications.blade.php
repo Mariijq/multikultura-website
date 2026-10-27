@@ -26,13 +26,22 @@
                         ?? '';
                 @endphp
 
-                <a href="#" class="list-page-card">
+                <a
+                    href="{{ route('frontend.publications-detail', $publication->id) }}"
+                    class="list-page-card"
+                    style="overflow: hidden;"
+                >
 
                     @if($publication->image)
                         <img
                             src="{{ asset('storage/' . $publication->image) }}"
                             alt="{{ $title }}"
                             loading="lazy"
+                            style="
+                                width: 100%;
+                                height: auto;
+                                display: block;
+                            "
                         >
                     @endif
 

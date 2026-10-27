@@ -89,4 +89,10 @@ return [
 'message_sent_successfully' => 'Вашата порака е успешно испратена.',
 
 'partners' => 'Партнери',
+
+'download_publication' => 'Преземи публикација',
+
+'search' => 'Пребарај',
+'search_results_for' => 'Резултати од пребарувањето за',
+'no_search_results' => 'Нема пронајдени резултати.',
 ];
